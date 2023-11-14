@@ -17,3 +17,5 @@ spec:
         image: <your-docker-image>
         ports:
         - containerPort: 8080
+        securityContext:
+          allowPrivilegeEscalation: false
