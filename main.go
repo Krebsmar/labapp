@@ -9,7 +9,7 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
-const Version = "1.0.5"
+const Version = "1.0.9"
 
 var (
 	versionGauge = prometheus.NewGaugeVec(
