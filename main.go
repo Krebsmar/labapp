@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 	"time"
 
@@ -22,6 +23,9 @@ var (
 )
 
 func main() {
+	log.Println("Starting the application...")
+	log.Printf("Version: %s\n", Version)
+
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "LabApp Version: %s\n", Version)
 	})
@@ -48,6 +52,9 @@ func generateLoad() {
 		// Perform some computation
 		for i := 0; i < 1e6; i++ {
 			_ = i * i
+			if i%100000 == 0 { // Log every 100000 iterations
+				log.Printf("Computation iteration: %d\n", i)
+			}
 		}
 
 		// Sleep for a while to avoid consuming too much CPU
