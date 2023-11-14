@@ -11,5 +11,4 @@ spec:
       targetPort: 8080
   type: LoadBalancer
   loadBalancerSourceRanges:
-  - 5.10.48.0/20  # Vodafone West GmbH
-  - 5.10.160.0/19 # Vodafone West GmbH
+  - 0.0.0.0/0
