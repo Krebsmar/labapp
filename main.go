@@ -26,6 +26,10 @@ func main() {
 		fmt.Fprintf(w, "LabApp Version: %s\n", Version)
 	})
 
+	http.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintf(w, "OK")
+	})
+
 	// Start the load generator
 	go generateLoad()
 
