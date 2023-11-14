@@ -37,6 +37,9 @@ func main() {
 	// Start the load generator
 	go generateLoad()
 
+	// Start the logger
+	go logAlive()
+
 	http.Handle("/metrics", promhttp.Handler())
 
 	prometheus.MustRegister(prometheus.NewBuildInfoCollector())
@@ -52,12 +55,20 @@ func generateLoad() {
 		// Perform some computation
 		for i := 0; i < 1e6; i++ {
 			_ = i * i
-			if i%100000 == 0 { // Log every 100000 iterations
-				log.Printf("Computation iteration: %d\n", i)
-			}
 		}
 
 		// Sleep for a while to avoid consuming too much CPU
 		time.Sleep(100 * time.Millisecond)
+	}
+}
+
+func logAlive() {
+	ticker := time.NewTicker(30 * time.Second)
+	defer ticker.Stop()
+
+	for {
+		log.Println("I'm alive!")
+		log.Printf("still running at: %v", time.Now().Format("2006-01-02 15:04:05"))
+		<-ticker.C
 	}
 }
