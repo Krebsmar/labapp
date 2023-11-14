@@ -18,6 +18,9 @@ RUN go build -o main .
 FROM alpine:latest
 RUN apk --no-cache add ca-certificates
 
+# Update openssl/libcrypto3
+RUN apk --no-cache upgrade openssl/libcrypto3
+
 WORKDIR /root/
 
 # Copy the binary from builder stage
