@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"time"
 
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
@@ -48,27 +47,4 @@ func main() {
 	versionGauge.WithLabelValues(Version).Set(1)
 
 	http.ListenAndServe(":8080", nil)
-}
-
-func generateLoad() {
-	for {
-		// Perform some computation
-		for i := 0; i < 1e6; i++ {
-			_ = i * i
-		}
-
-		// Sleep for a while to avoid consuming too much CPU
-		time.Sleep(100 * time.Millisecond)
-	}
-}
-
-func logAlive() {
-	ticker := time.NewTicker(30 * time.Second)
-	defer ticker.Stop()
-
-	for {
-		log.Println("I'm alive!")
-		log.Printf("still running at: %v", time.Now().Format("2006-01-02 15:04:05"))
-		<-ticker.C
-	}
 }
